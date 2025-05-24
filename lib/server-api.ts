@@ -8,7 +8,7 @@ const API_URL = "https://koenvandemeent.nl/wp-json"
 export const getCategories = cache(async (): Promise<WPCategory[]> => {
   try {
     const response = await fetch(`${API_URL}/wp/v2/categories?per_page=100`, {
-      next: { revalidate: 86400 }, // Cache for 24 hours
+      next: { revalidate: 3600 }, // Cache for 1 hour
     })
 
     if (!response.ok) throw new Error("Failed to fetch categories")
@@ -23,7 +23,7 @@ export const getCategories = cache(async (): Promise<WPCategory[]> => {
 export const getPosts = cache(async (): Promise<WPPost[]> => {
   try {
     const response = await fetch(`${API_URL}/wp/v2/posts?per_page=100&_embed=1`, {
-      next: { revalidate: 86400 }, // Cache for 24 hours
+      next: { revalidate: 3600 }, // Cache for 1 hour
     })
 
     if (!response.ok) throw new Error("Failed to fetch posts")
@@ -37,7 +37,7 @@ export const getPosts = cache(async (): Promise<WPPost[]> => {
 export const getPostsByCategory = cache(async (categoryId: number): Promise<WPPost[]> => {
   try {
     const response = await fetch(`${API_URL}/wp/v2/posts?categories=${categoryId}&per_page=100&_embed=1`, {
-      next: { revalidate: 86400 }, // Cache for 24 hours
+      next: { revalidate: 3600 }, // Cache for 1 hour
     })
 
     if (!response.ok) throw new Error("Failed to fetch posts by category")
@@ -51,7 +51,7 @@ export const getPostsByCategory = cache(async (categoryId: number): Promise<WPPo
 export const getPostBySlug = cache(async (slug: string): Promise<WPPost | null> => {
   try {
     const response = await fetch(`${API_URL}/wp/v2/posts?slug=${slug}&_embed=1`, {
-      next: { revalidate: 86400 }, // Cache for 24 hours
+      next: { revalidate: 3600 }, // Cache for 1 hour
     })
 
     if (!response.ok) throw new Error("Failed to fetch post")
