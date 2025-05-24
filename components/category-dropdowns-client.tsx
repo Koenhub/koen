@@ -37,7 +37,8 @@ export function CategoryDropdownsClient({ initialCategories }: CategoryDropdowns
 
   const handlePostSelect = (post: WPPost | null) => {
     if (post) {
-      router.push(`/${post.slug}/`)
+      // Use window.location.href for a full page navigation
+      window.location.href = `/${post.slug}`
     }
   }
 
